@@ -94,7 +94,7 @@ calculateMAPE <- function(af, sort = FALSE, digits = 2){
   df2 <- data.frame(MAPE, horizon, method_id )
   # plots MAPEs frame
   gp1 <- ggplot2::ggplot(df2, ggplot2::aes(x=horizon, y=MAPE, group=method_id,color=method_id, shape=method_id))+
-    ggplot2::scale_shape_manual(values=1:nlevels(df2$method_id)) +
+    ggplot2::scale_shape_manual(values=1:nlevels(df2$method_id + 20)) +
     ggplot2::labs(title = "MAPE for different horizons and methods") +
     ggplot2::geom_line() +
     ggplot2::geom_point(size=3)+
