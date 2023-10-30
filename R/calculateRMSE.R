@@ -95,7 +95,7 @@ calculateRMSE <- function(af, sort = FALSE, digits = 3){
   df2 <- data.frame(MdAPE, horizon, method_id )
   # plots MdAPEs frame
   gp1 <- ggplot2::ggplot(df2, ggplot2::aes(x=horizon, y=MdAPE, group=method_id,color=method_id, shape=method_id))+
-    ggplot2::scale_shape_manual(values=1:nlevels(df2$method_id)) +
+    ggplot2::scale_shape_manual(values=1:(length(unique(df2$method_id)))) +
     ggplot2::labs(title = "RMSE for different horizons and methods", y = "RMSE") +
     ggplot2::geom_line() +
     ggplot2::geom_point(size=3)+

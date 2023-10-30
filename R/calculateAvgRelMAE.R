@@ -113,7 +113,7 @@ calculateAvgRelMAE <- function(af, bench, sort = FALSE, digits = 3) {
   df3 <- df3[is.finite(df3$AvgRelMAEs), ]
   # plots AvgRelMAEs frame
   gp1 <- ggplot2::ggplot(df3, ggplot2::aes(x=horizon, y=AvgRelMAEs, group=method_id,color=method_id, shape=method_id))+
-    ggplot2::scale_shape_manual(values=1:nlevels(df3$method_id)) +
+    ggplot2::scale_shape_manual(values=1:(length(unique(df3$method_id)))) +
     ggplot2::labs(title = "AvgRelMAEs for different horizons and methods") +
     ggplot2::geom_line() +
     ggplot2::geom_point(size=3)+
