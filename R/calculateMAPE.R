@@ -91,17 +91,23 @@ calculateMAPE <- function(af, sort = FALSE, digits = 2){
   MAPE <- Reduce(c, MAPE1)
   horizon <- Reduce(c, horizonlist)
   method_id = Reduce(c, methodlist)
-  df2 <- data.frame(MAPE, horizon, method_id )
+  df2 <- data.frame(MAPE, horizon, method_id)
+
+  x <- length(unique(df2$method_id))
+
   # plots MAPEs frame
   gp1 <- ggplot2::ggplot(df2, ggplot2::aes(x=horizon, y=MAPE, group=method_id,color=method_id, shape=method_id))+
-    ggplot2::scale_shape_manual(values=1:(nlevels(df2$method_id) + 20)) +
+    ggplot2::scale_shape_manual(values=1:(length(unique(df2$method_id)))) +
     ggplot2::labs(title = "MAPE for different horizons and methods") +
     ggplot2::geom_line() +
     ggplot2::geom_point(size=3)+
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
   # Create outputlist for MAPE and rank of MAPE
-  outlist <- list("accuracy" = df, "rank" =ranks, "plot" = gp1)
+  print(Reduce(c, methodlist))
+  print(length(unique(Reduce(c, methodlist))))
+  print(nlevels(df2$method_id))
+  outlist <- list("accuracy" = df, "rank" = ranks, "x" = x, "plot" = gp1)
 
   # using sorting if TRUE
   if(sort == FALSE){
