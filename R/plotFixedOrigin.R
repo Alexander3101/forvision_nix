@@ -69,7 +69,7 @@ plotFixedOrigin <- function(ts, fc = NULL, series, origin, method = NULL, graphL
 
   if (graphLib == "ggplot"){
     ts <- dplyr::filter(ts, series_id == series)
-    ts$timestamp_dbo <- as.Date.yearmon(ts$timestamp_dbo, frac = 1)
+    ts$timestamp_dbo <- as.Date.yearmon(ts$timestamp_dbo)
     ts <- dplyr::rename(ts, date = timestamp_dbo)
     if (is.null(fc)) {
       p <- ggplot2::ggplot(data = ts, ggplot2::aes(date, value)) +
@@ -94,7 +94,7 @@ plotFixedOrigin <- function(ts, fc = NULL, series, origin, method = NULL, graphL
       }
       fc <- dplyr::filter(fc, series_id == series, origin_timestamp == origin, method_id %in% method)
       a <- length(ts$timestamp) - (length(fc$timestamp)/length(method))
-      fc$timestamp_dbo <- as.Date(fc$timestamp_dbo)
+      fc$timestamp_dbo <- as.Date.yearmon(fc$timestamp_dbo)
       fc <- dplyr::rename(fc, date = timestamp_dbo)
       p <- ggplot2::ggplot() +
         ggplot2::geom_line(data = ts, ggplot2::aes(date, value, linetype = "Actual values"), size = 1) +
