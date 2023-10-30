@@ -62,6 +62,10 @@ plotFixedOrigin <- function(ts, fc = NULL, series, origin, method = NULL, graphL
     stop("The column timestamp_dbo of TSTS schema requires an appropriate time-based object")
   }
 
+  class(fc$timestamp)
+  class(ts$timestamp_dbo)
+  library(zoo)
+
   if (graphLib == "ggplot"){
     ts <- dplyr::filter(ts, series_id == series)
     ts$timestamp_dbo <- as.Date(ts$timestamp_dbo)
