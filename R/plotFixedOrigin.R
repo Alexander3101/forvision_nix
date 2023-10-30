@@ -69,7 +69,7 @@ plotFixedOrigin <- function(ts, fc = NULL, series, origin, method = NULL, graphL
 
   if (graphLib == "ggplot"){
     ts <- dplyr::filter(ts, series_id == series)
-    ts$timestamp_dbo <- as.Date(ts$timestamp_dbo)
+    ts$timestamp_dbo <- as.Date(ts$timestamp_dbo, frac = 1)
     ts <- dplyr::rename(ts, date = timestamp_dbo)
     if (is.null(fc)) {
       p <- ggplot2::ggplot(data = ts, ggplot2::aes(date, value)) +
